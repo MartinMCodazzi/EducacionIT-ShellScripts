@@ -1,1 +1,5 @@
 #!/bin/bash
+
+
+# Lo que hace: Un script que crea los archivos de configuracion necesarios
+# en un servidor Apache, y las entradas pertinentes en un servidor BIND 
