@@ -48,22 +48,6 @@ function menu {
 }
 
 function crea_apache {
-      dialog --inputbox "Ingrese el dominio a dar de alta:" 16 51 2   \
-      2> $TMPFILE
-      DOMINIO= $(cat $TEMPFILE)
-      rm $TEMPFILE
-      echo $DOMINIO
-
-      dialog --clear --ok-label "Crear" \
-        --extra-label "Editar" \
-          --backtitle "Crear entrada para Server APACHE" \
-          --menu "Configuracion del nuevo Virtualhost" 20 50 10 \
-        "Dominio"     "$DOMINIO" \
-        "El root de la web:"     "/var/www/$DOMINIO" \
-        "Logs de error:"       "/var/log/apache2/$DOMINIO/error.log" \
-        "Logs de acceso:"         "/var/log/apache2/$DOMINIO/access.log" \
-
-        1234
-
+      # quizás llame al archivo AltaApache
 
 }
