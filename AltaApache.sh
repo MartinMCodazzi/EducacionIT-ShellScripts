@@ -20,7 +20,6 @@ DOCUMENTROOT="/var/www/$DOMINIO"
 ERRORLOG="/var/log/apache2/${DOMINIO}_error.log"
 ACCESSLOG="/var/log/apache2/${DOMINIO}_access.log"
 
-
 returncode=0
 while test $returncode != 1 && test $returncode != 250
 do
