@@ -8,6 +8,8 @@ DIALOG_CANCEL=1
 DIALOG_HELP=2
 DIALOG_EXTRA=3
 DIALOG_ESC=255
+# ELIMINAR ESTAS LINEAS CUANDO TERMINE
+
 returncode=0
 
 while test $returncode != 1 && test $returncode != 251
@@ -15,7 +17,7 @@ do
 	exec 3>&1
 	DOMINIO=`$DIALOG --title "Crear dominio" --clear  \
 		--backtitle "$backtitle" \
-	      --inputbox "Ingrese el dominio a dar de alta" 0 0 2>&1 1>&3`
+	    --inputbox "Ingrese el dominio a dar de alta" 0 0 2>&1 1>&3`
 	returncode=$?
 	exec 3>&-
 
