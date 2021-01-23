@@ -40,7 +40,7 @@ function menu {
     rm -f /tmp/item.$$
 
     case $item in
-       Apache) ;;
+       Apache) ;;s
        BIND) ;;
        Ambos) ;;
        *) break ;;
