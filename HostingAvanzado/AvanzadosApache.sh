@@ -7,12 +7,12 @@ do
 	exec 3>&1
 	OPCIONALES=`$DIALOG --backtitle "Opciones avanzadas $DOMINIO" \
 	--title "Opcionales" \
-        --menu "Opcionales a la creacion del archivo de configuracion de apache" 0 0 0 \
-        "Usuario"  "Cambiar el usuario por defecto"  \
-        "Grupo"    "Cambiar el grupo por defecto"  \
-        "MPM" "Editar modulo MPM"  \
-        "HTTPS"    "Habilitar HTTPS"  \
-        "www"    "crear alias www.$DOMINIO" \
+        --menu "Opciones avanzadas dominio apache" 0 0 0 \
+        "Usuario"  	"Cambiar el usuario por defecto"	 \
+        "Grupo"    	"Cambiar el grupo por defecto"  	 \
+        "MPM" 		"Editar modulo MPM"  				 \
+        "HTTPS"    	"Habilitar HTTPS"  					 \
+        "www"    	"crear alias www.$DOMINIO" 			 \
 		2>&1 1>&3`
 
 		exec 3>&-
