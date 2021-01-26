@@ -1,30 +1,17 @@
-#! /bin/sh
+#!/bin/bash
 # Alta de webs en apache2, Debian
 backtitle="Alta de Webs en APACHE/BIND9"
-
-DIALOG=dialog
-DIALOG_OK=0
-DIALOG_CANCEL=1
-DIALOG_HELP=2
-DIALOG_EXTRA=3
-DIALOG_ESC=255
-# ELIMINAR ESTAS LINEAS CUANDO TERMINE
 
 returncode=0
 
 while test $returncode != 1 && test $returncode != 251
 do
 	exec 3>&1
-	DOMINIO=`$DIALOG --title "Crear dominio" --clear  \
-		--backtitle "$backtitle" \
+	DOMINIO=`$DIALOG --title "Crear dominio" --clear    \
+		--backtitle "$backtitle" 						\
 	    --inputbox "Ingrese el dominio a dar de alta" 0 0 2>&1 1>&3`
 	returncode=$?
 	exec 3>&-
-
-	# case $returncode in
-	# 	0) echo "OK";;
-	# 	1) echo "Cancelar";;
-	# esac
 
 	if [ $returncode -eq $DIALOG_CANCEL ] ; then
 		break
@@ -34,18 +21,17 @@ do
 	ERRORLOG="/var/log/apache2/${DOMINIO}_error.log"
 	ACCESSLOG="/var/log/apache2/${DOMINIO}_access.log"
 
-	#returncode=0
 	while test $returncode != 1 && test $returncode != 250
 	do
 		exec 3>&1
-		value=`$DIALOG --clear --ok-label "Crear" \
-		--backtitle "$backtitle" \
-		--inputmenu "Caracteristicas del Virtual Host" \
-		20 50 10 \
-		"Dominio:"	"$DOMINIO" \
-		"DocumentRoot:"	"$DOCUMENTROOT" \
-		"ErrorLog:"	"$ERRORLOG" \
-		"AccessLog:"	"$ACCESSLOG" \
+		value=`$DIALOG --clear --ok-label "Crear" 		\
+		--backtitle "$backtitle" 						\
+		--inputmenu "Caracteristicas del Virtual Host"  \
+		20 50 10 										\
+		"Dominio:"	"$DOMINIO" 							\
+		"DocumentRoot:"	"$DOCUMENTROOT" 				\
+		"ErrorLog:"	"$ERRORLOG" 						\
+		"AccessLog:"	"$ACCESSLOG" 					\
 		2>&1 1>&3`
 		#Esto hace que $value valga 0,1 o 3, estos números se referencian más abajo
 		returncode=$?
@@ -71,10 +57,10 @@ do
 				while test $returncode != 1 && test $returncode != 250
 				do
 				# Esto seía $value=0 , cuando le damos a "crear"
-					"$DIALOG" --clear \
-					--backtitle "$backtitle"         \
-					--extra-button                   \
-					--extra-label "Avanzados"         \
+					"$DIALOG" --clear 					\
+					--backtitle "$backtitle"         	\
+					--extra-button                   	\
+					--extra-label "Avanzados"         	\
 					--yesno "Desea crear el VHost? \n\
 					$DOMINIO \n\
 					DocumentRoot: $DOCUMENTROOT \n\
@@ -89,8 +75,8 @@ do
 						$DIALOG_OK)
 							#ACA se haría la magia
 
-							"$DIALOG" --clear \
-							--backtitle "$backtitle" \
+							"$DIALOG" --clear 					  \
+							--backtitle "$backtitle" 			  \
 							--yesno "Desea crear otro dominio?" 0 0
 							case $? in
 								$DIALOG_OK)
@@ -113,8 +99,8 @@ do
 
 			$DIALOG_EXTRA)
 				# Esto se ejecuta cuando cambiamos algo
-				tag=`echo "$value" |sed -e 's/^RENAMED //' -e 's/:.*//'`
-				item=`echo "$value" |sed -e 's/^[^:]*:[ ]*//' -e 's/[ ]*$//'`
+				tag=`echo "$value" | sed -e 's/^RENAMED //' -e 's/:.*//'`
+				item=`echo "$value" | sed -e 's/^[^:]*:[ ]*//' -e 's/[ ]*$//'`
 
 				case "$tag" in
 					Dominio)

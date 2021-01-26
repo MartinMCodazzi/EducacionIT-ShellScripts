@@ -1,11 +1,7 @@
-#!/bin/bash
+#/bin/bash
 
-DIALOG=dialog
-DIALOG_OK=0
-DIALOG_CANCEL=1
-DIALOG_HELP=2
-DIALOG_EXTRA=3
-DIALOG_ESC=255
+. ./funciones.sh
+. ./variables.sh
 
 backtitle="Administrador Apache/BIND"
 salidamenu=0
@@ -19,6 +15,8 @@ do
      --menu "Bienvenido, elija lo que desea hacer" 0 0 0  \
      "AltaWeb" "Dar de alta una página/dominio"           \
      "BajaWeb" "Dar de baja una página/dominio"           \
+     "TestApache" "Testeo de archivos de configuracion"   \
+     "RecargaApache" "Recarga la configuración del apache"\
      "ModWeb"  "Modificar paametros página/dominio"       \
      "AltaDNS" "Da de alta un dominio al DNS"             \
      "BajaDNS" "Da de baja un dominio al DNS"             \
@@ -27,11 +25,15 @@ do
     exec 3>&-
 
     case $MENU in
-        AltaWeb)  . ./AltaApache.sh;;
-        BajaWeb);;
-        ModWeb);;
+        AltaWeb) . ./AltaApache.sh;;
+        BajaWeb) . ./BajaApache.sh;;
+        TestApache) Test_apache;;
+        RecargaApache)recargar_apache;;
+        ModWeb)nodis;;
         AltaDNS);;
         BajaDNS);;
 
     esac
 done
+clear
+echo "CHAU"

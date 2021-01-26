@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/bash
 
 
 salida=0
@@ -13,6 +13,7 @@ do
         "MPM" 		"Editar modulo MPM"  				 \
         "HTTPS"    	"Habilitar HTTPS"  					 \
         "www"    	"crear alias www.$DOMINIO" 			 \
+		"Puerto"	"Cambiar puerto por defecto"		 \
 		2>&1 1>&3`
 
 		exec 3>&-
@@ -23,6 +24,7 @@ do
 			MPM) echo "MPM está seleccionado";;
 			HTTPS) echo "HTTPS está seleccionado";;
 			www) echo "WWW está seleccionado";;
+			Puerto) puerto;;
 			*) salida=250;;
 		esac
 done
