@@ -1,3 +1,4 @@
+#!/bin/bash
 # Documento de variables generales
 
 DIALOG=dialog
@@ -7,6 +8,9 @@ DIALOG_HELP=2
 DIALOG_EXTRA=3
 DIALOG_ESC=255
 
-USUARIO=httpd
-GRUPO=httpd
-DOCROOT=
+function inicializar_alta {
+      USUARIO=httpd
+      GRUPO=httpd
+      DOCROOT=
+
+}

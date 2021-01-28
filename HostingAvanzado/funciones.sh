@@ -1,16 +1,6 @@
 #!/bin/bash
 
-DIALOG=dialog
-DIALOG_OK=0
-DIALOG_CANCEL=1
-DIALOG_HELP=2
-DIALOG_EXTRA=3
-DIALOG_ESC=255
 
-USUARIO=httpd
-GRUPO=httpd
-DOCROOT=
-PUERTO=
 # case $? in
 #     $DIALOG_OK);;
 #     $DIALOG_CANCEL);;
@@ -117,5 +107,28 @@ function baja_web {
             Tiene permisos?" 0 0
         ;;
     esac
+}
 
+function get_os {
+  #Me interesa saber qué os está corriendo, para saber como llamar al servicio
+if [ $(cat /etc/os-release | grep ^ID=) == ID=debian ] ; then
+      OSACTUAL="Debian"
+      SERVICIO_WEB="apache2"
+
+      elif [ $(cat /etc/os-release | grep ^ID=) == ID=\"centos\" ]; then
+        OSACTUAL="Centos"
+        SERVICIO_WEB=httpd
+
+      else OSACTUAL="Other"
+fi
+}
+
+function apache_status {
+  # Acá, consulto el stado del servicio de apache, segun el OS,
+  # quizás implemente algo en el dialog con esto
+    if ! pgrep -x $SERVICIO_WEB > /dev/null ; then
+      return "Apache status: OFF"
+      else
+      return "Apache Status: ON"
+    fi
 }
